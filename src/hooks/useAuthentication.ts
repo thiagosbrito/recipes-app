@@ -1,7 +1,6 @@
 import * as RoutesConstants from '@/constants/routes';
 import { AuthContext } from '@/providers/AuthProvider';
-import { useRouter } from 'next/navigation';
-import { useRouter as useRouterNext } from 'next/router';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 const GUEST_ROUTES = [
@@ -16,8 +15,8 @@ const useAuthentication = () => {
     const { user }: any = AuthContext();
     const userInfo = user?.user || null;
     const router = useRouter();
-    const route = useRouterNext();
-    const currentRoute = route.pathname;
+    const pathname = usePathname();
+    const currentRoute = pathname;
 
     useEffect(() => {
         if (!userInfo) {
