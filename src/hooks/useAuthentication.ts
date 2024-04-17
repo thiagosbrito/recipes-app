@@ -1,3 +1,4 @@
+'use client';
 import * as RoutesConstants from '@/constants/routes';
 import { AuthContext } from '@/providers/AuthProvider';
 import { useRouter } from 'next/navigation';
