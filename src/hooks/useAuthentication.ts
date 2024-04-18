@@ -19,11 +19,13 @@ const useAuthentication = () => {
     const currentRoute = pathname;
 
     useEffect(() => {
-        if (!userInfo) {
-            router.push(RoutesConstants.SIGNIN_ROUTE);
-        }
+        console.log(userInfo, currentRoute);
+        // if (!userInfo) {
+        //     router.push(RoutesConstants.SIGNIN_ROUTE);
+        // }
 
         if (!userInfo && !GUEST_ROUTES.includes(currentRoute)) {
+            console.log('Redirecting to Signin');
             router.push(RoutesConstants.SIGNIN_ROUTE);
         }
 
