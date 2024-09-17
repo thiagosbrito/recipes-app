@@ -6,3 +6,19 @@ export const AuthCredentialsValidator = z.object({
 })
 
 export type TAuthCredentialsValidator = z.infer<typeof AuthCredentialsValidator>;
+
+export const SignUpValidator = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, {message: 'Password must be at least 8 characters long'}),
+  confirmPassword: z.string().min(8, {message: 'Password must be at least 8 characters long'})
+}).superRefine(({ confirmPassword, password }, checkPasswordValidity) => {
+  if (confirmPassword !== password) {
+    checkPasswordValidity.addIssue({
+      path: ["confirmPassword"],
+      code: "custom",
+      message: "The passwords did not match"
+    });
+  }
+});
+
+export type TSignUpValidator = z.infer<typeof SignUpValidator>;
