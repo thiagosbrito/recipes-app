@@ -12,8 +12,14 @@ import { OctagonX } from 'lucide-react';
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import useAuthentication from "@/hooks/useAuthentication";
+import * as RouteConstants from "@/constants/routes";
+
 
 const SignInPage = () => {
+    useAuthentication();
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -26,6 +32,7 @@ const SignInPage = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((response) => {
                 console.log(response)
+                router.push(RouteConstants.DASHBOARD_ROUTE)
             })
             .catch((e) => {
                 toast.error(e.message)
